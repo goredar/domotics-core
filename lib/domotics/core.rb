@@ -39,6 +39,7 @@ gem_path = File.dirname(__FILE__)
 #require all
 Dir["#{gem_path}/core/data/*.rb"].each {|file| require file}
 Dir["#{gem_path}/core/*.rb"].each {|file| require file}
+Dir["#{gem_path}/core/helper/*.rb"].each {|file| require file}
 # scan all devices and elements and populate class map
 [:device, :room, :element].each do |type|
   Dir["#{gem_path}/core/#{type}/*.rb"].each do |file|

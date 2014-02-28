@@ -59,7 +59,7 @@ module Domotics::Core
     def self.init
       $emul = Domotics::Arduino::BoardEmulator.new
       Domotics::Core.add_map type: :room, class_name: "TestRoom"
-      Domotics::Core::Setup.new IO.read File.expand_path("../../../test/config.test.rb", File.dirname(__FILE__))
+      Domotics::Core::Setup.new IO.read File.expand_path("../../../../test/config.test.rb", File.dirname(__FILE__))
     end
   end
 end
