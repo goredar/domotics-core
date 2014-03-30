@@ -23,8 +23,8 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "hiredis"
   spec.add_runtime_dependency "mongo"
   spec.add_runtime_dependency "bson_ext"
-
   spec.add_runtime_dependency "rack"
+  spec.add_runtime_dependency "rb-inotify"
 
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"

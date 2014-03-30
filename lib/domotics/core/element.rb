@@ -10,6 +10,12 @@ module Domotics::Core
       set_state(self.state || :off)
     end
 
+    def load_driver(args = {})
+      return unless args[:device_type]
+      device_space = args[:device_type].to_s.split("_").map{ |x| x.capitalize }.join
+      self.class.class_eval(%(include Domotics::#{device_space}::#{args[:driver]}), __FILE__, __LINE__)
+    end
+
     def state
       @@data[self].state
     end
@@ -19,11 +25,20 @@ module Domotics::Core
         { :elements =>
           { @name =>
             { :state => state,
-              :info => (info if respond_to? :info)
+              :info => info,
+              :img => image,
             }
           }
         }
       }
+    end
+
+    def info
+      nil
+    end
+
+    def image
+      nil
     end
 
     def set_state(value)

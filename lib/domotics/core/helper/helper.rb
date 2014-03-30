@@ -65,7 +65,7 @@ module Domotics::Core
 end
 
 class Object 
-  def eigenclass 
+  def eigenclass
     class << self
       self
     end 

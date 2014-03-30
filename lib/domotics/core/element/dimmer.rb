@@ -12,10 +12,8 @@ module Domotics::Core
       @type = args[:type] || :dimmer
       @fade_lock = Mutex.new
       @fade_thread = nil
-      if args[:device_type]
-        eval_str = %(include Domotics::#{args[:device_type].capitalize}::PWMPin)
-        self.class.class_eval(eval_str, __FILE__, __LINE__)
-      end
+      args[:driver] = "PWMPin"
+      load_driver args
       super
     end
 

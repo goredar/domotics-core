@@ -1,12 +1,16 @@
+require 'bundler/setup'
 # From data_mongo
 require 'mongo'
 # From data_redis
 require 'redis'
 require 'hiredis'
 # From arduino_board
+#require "../domotics-arduino/lib/domotics/arduino"
 require 'domotics/arduino'
 # From server
 require 'json'
+# From file_camera_device
+require 'rb-inotify'
 
 module Domotics
   module Core
@@ -37,9 +41,9 @@ end
 
 gem_path = File.dirname(__FILE__)
 #require all
-Dir["#{gem_path}/core/data/*.rb"].each {|file| require file}
-Dir["#{gem_path}/core/*.rb"].each {|file| require file}
-Dir["#{gem_path}/core/helper/*.rb"].each {|file| require file}
+%w(core/data/*.rb core/*.rb core/helper/*.rb file_camera/*.rb).each do |path|
+  Dir["#{gem_path}/#{path}"].each {|file| require file}
+end
 # scan all devices and elements and populate class map
 [:device, :room, :element].each do |type|
   Dir["#{gem_path}/core/#{type}/*.rb"].each do |file|

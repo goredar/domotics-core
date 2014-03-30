@@ -5,10 +5,8 @@ module Domotics::Core
       @type = args[:type] || :switch
       @lag = nil
       @lag_lock = Mutex.new
-      if args[:device_type]
-        eval_str = %(include Domotics::#{args[:device_type].capitalize}::DigitalPin)
-        self.class.class_eval(eval_str, __FILE__, __LINE__)
-      end
+      args[:driver] = "DigitalPin"
+      load_driver args
       @initialized = false
       super
       @initialized = true

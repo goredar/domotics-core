@@ -43,6 +43,7 @@ module Domotics::Core
     def device(klass, args = {})
       @current_device[:name] = args[:name]
       @current_device[:type] = args[:type]
+      args[:room] = Room[@current_room[:name]]
       klass.new(args) unless Device[args[:name]]
       yield if ::Kernel.block_given?
       @current_device.clear

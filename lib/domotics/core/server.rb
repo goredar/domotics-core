@@ -5,7 +5,9 @@ module Domotics::Core
     end
     def call(env)
       # [object]/[action]/[params]
+      p env['PATH_INFO']
       request = env['PATH_INFO'][1..-1].split('/')
+      request[-1], form = request.last.split(".")
       object = request.shift
       return invalid 'room' unless object and object = Room[object.to_sym]
       return invalid 'element or action' unless object_action = request.shift
@@ -18,13 +20,20 @@ module Domotics::Core
       end
       return invalid 'action' unless action and object.respond_to? action
       begin
-        object.public_send(action, *request.map { |param| param.to_isym })
+        result = object.public_send(action, *request.map { |param| param.to_isym })
       rescue Exception => e
         @logger.error { e.message }
         @logger.debug { e }
         return invalid 'request'
       end
-      return ok object.verbose_state.to_json
+      case form
+      when "json"
+        return ok object.verbose_state.to_json
+      when "jpg"
+        return jpg result
+      else
+        return ok object.verbose_state
+      end
     end
 
     private
@@ -34,6 +43,9 @@ module Domotics::Core
     end
     def ok(param)
       [200, {"Content-Type" => "text/html"}, [param]]
+    end
+    def jpg(param)
+      [200, {"Content-Type" => "image/jpeg"}, [param]]
     end
   end
 end

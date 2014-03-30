@@ -1,4 +1,7 @@
 test_room :test do
+  file_camera :cam do
+    motion_sensor :cam_motion
+  end
   button :button_no_dev
   dimmer :dimmer_no_dev
   motion_sensor :ms_no_dev

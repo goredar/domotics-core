@@ -5,10 +5,8 @@ module Domotics::Core
       @touch = args[:touch]
       @taped = true
       #@tap_lock = Mutex.new
-      if args[:device_type]
-        eval_str = %(include Domotics::#{args[:device_type].capitalize}::#{@touch ? 'DigitalSensor' : 'NOSensor'})
-        self.class.class_eval(eval_str, __FILE__, __LINE__)
-      end
+      args[:driver] = @touch ? "DigitalSensor" : "NOSensor"
+      load_driver args
       super
     end
     def set_state(*args)
