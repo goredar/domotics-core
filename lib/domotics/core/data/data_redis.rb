@@ -23,8 +23,6 @@ module Domotics::Core
     end
 
     def get(*args)
-      p args
-      p @redis.get *args
       @redis.get *args
     end
     def set(*args)
