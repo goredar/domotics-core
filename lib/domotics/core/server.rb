@@ -5,7 +5,6 @@ module Domotics::Core
     end
     def call(env)
       # [object]/[action]/[params]
-      p env['PATH_INFO']
       request = env['PATH_INFO'][1..-1].split('/')
       request[-1], form = request.last.split(".")
       object = request.shift
@@ -30,9 +29,10 @@ module Domotics::Core
       when "json"
         return ok object.verbose_state.to_json
       when "jpg"
-        return jpg result
+        return jpg result if result
+        return invalid 'request'
       else
-        return ok object.verbose_state
+        return ok object.verbose_state.to_s
       end
     end
 
