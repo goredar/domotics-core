@@ -18,16 +18,16 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "domotics-arduino", '~> 0'
-  spec.add_runtime_dependency "redis", '~> 0'
-  spec.add_runtime_dependency "hiredis", '~> 0'
-  spec.add_runtime_dependency "mongo", '~> 0'
-  spec.add_runtime_dependency "bson_ext", '~> 0'
-  spec.add_runtime_dependency "rack", '~> 0'
-  spec.add_runtime_dependency "rb-inotify", '~> 0'
+  spec.add_runtime_dependency "domotics-arduino"
+  spec.add_runtime_dependency "redis"
+  spec.add_runtime_dependency "hiredis"
+  spec.add_runtime_dependency "mongo"
+  spec.add_runtime_dependency "bson_ext"
+  spec.add_runtime_dependency "rack"
+  spec.add_runtime_dependency "rb-inotify"
 
-  spec.add_development_dependency "bundler", '~> 0'
-  spec.add_development_dependency "rake", '~> 0'
-  spec.add_development_dependency "test-unit", '~> 0'
-  spec.add_development_dependency "rack-test", '~> 0'
+  spec.add_development_dependency "bundler"
+  spec.add_development_dependency "rake"
+  spec.add_development_dependency "test-unit"
+  spec.add_development_dependency "rack-test"
 end
