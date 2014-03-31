@@ -1,8 +1,8 @@
 module Domotics::Core
   class FileCameraDevice < Device #__as__ :file_camera
     def initialize(args = {})
+      @current_name = nil
       # Emulate element
-      @current_link = "xxx"
       @camera_element = Element.new args
       s = self
       image_lambda = lambda { s.current_link }
@@ -27,21 +27,24 @@ module Domotics::Core
     end
     def event_handler(event)
       filename = "#{@path}/#{event.name}"
+      @current_name = "#{@path}/#{Time.now.to_i}#{@file_ext}"
       # Wait untill close file and rename it
-      inot = INotify::Notifier.new
-      inot.watch(filename, :close_write) do |file|
-        @current_name = "#{@path}/#{Time.now.to_i}#{@file_ext}"
-        sleep 0.1
-        File.rename filename, @current_name
-      end
-      inot.process
-      inot.close
+      #inot = INotify::Notifier.new
+      #inot.watch(filename, :close_write) do |file|
+      #  @current_name = "#{@path}/#{Time.now.to_i}#{@file_ext}"
+      #  sleep 0.1
+      #  File.rename filename, @current_name
+      #end
+      #inot.process
+      #inot.close
+      sleep 0.5
+      File.rename filename, @current_name
     end
     def current_link
       "#{@camera_element.room.name}/#{@camera_element.name}/file/#{Time.now.to_i}#{@file_ext}"
     end
-    def current_file(*args)
-      IO.read @current_name
+    def current_file
+      IO.read @current_name if @current_name
     end
   end
 end
