@@ -3,8 +3,9 @@ module Domotics::Core
     @@devices = {}
     attr_reader :name, :type
     def initialize(args = {})
-      @@devices[@name = args[:name]] = self
-      @type = args[:type]
+      @name = args[:name] || SecureRandom.hex
+      @@devices[@name] = self
+      @type = args[:type] || "undefined"
     end
 
     def self.[](symbol = nil)

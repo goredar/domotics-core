@@ -5,6 +5,7 @@ module Domotics::Core
 
     def initialize(args = {})
       @room = args[:room]
+      @device = args[:device]
       @room.register_element self, @name = args[:name]
       @type ||= :element
       set_state(self.state || :off)

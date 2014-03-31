@@ -1,16 +1,18 @@
 require 'bundler/setup'
+# From arduino_board
+#require "../domotics-arduino/lib/domotics/arduino"
+require 'domotics/arduino'
 # From data_mongo
 require 'mongo'
 # From data_redis
 require 'redis'
 require 'hiredis'
-# From arduino_board
-#require "../domotics-arduino/lib/domotics/arduino"
-require 'domotics/arduino'
-# From server
-require 'json'
+# From device
+require 'securerandom'
 # From file_camera_device
 require 'rb-inotify'
+# From server
+require 'json'
 
 module Domotics
   module Core
