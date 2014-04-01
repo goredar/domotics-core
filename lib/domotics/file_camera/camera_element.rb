@@ -4,7 +4,7 @@ module Domotics
       def image
         @device.current_link
       end
-      def file
+      def file(*args)
         @device.current_file
       end
       def mode(param)
