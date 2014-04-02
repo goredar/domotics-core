@@ -1,6 +1,10 @@
 module Domotics
   module FileCamera
     class CameraElement < Domotics::Core::Element
+      def initialize(args = {})
+        super
+        set_state @device.mode
+      end
       def image
         @device.current_link
       end

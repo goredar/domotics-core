@@ -6,9 +6,9 @@ Thread.class_eval do
       begin
         block.call
       rescue Exception => e
-        $logger.error { e.message }
-        $logger.debug { e.inspect }
-        raise e
+        Domotics::Core::Setup.logger.error { e.message }
+        Domotics::Core::Setup.logger.debug { e }
+        nil
       end
     end
   end

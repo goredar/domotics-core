@@ -13,6 +13,8 @@ require 'securerandom'
 require 'rb-inotify'
 # From server
 require 'json'
+# From ws_server
+require 'em-websocket'
 
 module Domotics
   module Core

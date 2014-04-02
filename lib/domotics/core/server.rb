@@ -1,7 +1,7 @@
 module Domotics::Core
   class Server
     def initialize(args = {})
-      @logger = $logger || Logger.new(STDERR)
+      @logger = Domotics::Core::Setup.logger || Logger.new(STDERR)
     end
     def call(env)
       # [object]/[action]/[params]

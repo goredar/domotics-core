@@ -4,15 +4,13 @@ module Domotics::Core
   class Setup < BasicObject
     @@logger = ::Logger.new(::STDERR)
     @@logger.level = ::Logger::FATAL
-    $logger = @@logger
     def self.logger
       @@logger
     end
     def self.logger=(logger)
       @@logger = logger
-      $logger = @@logger
     end
-    
+
     def initialize(conf)
       @current_room = {}
       @current_device = {}
