@@ -2,8 +2,6 @@ module Domotics::Core
   class Server
     def initialize(args = {})
       @logger = Domotics::Core::Setup.logger || Logger.new(STDERR)
-      @args = {}
-      @args[:Host], @args[:Port] = args[:host], args[:port]
     end
     def call(env)
       # [object]/[action]/[params]
@@ -38,8 +36,10 @@ module Domotics::Core
       end
     end
 
-    def run
-      Rack::Handler::Thin.run Rack::Builder.new{ run Domotics::Core::Server.new }, @args
+    def self.run(args = {})
+      Thread.new do
+        Rack::Handler::Thin.run self.new, args
+      end
     end
 
     private
