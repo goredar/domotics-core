@@ -17,6 +17,10 @@ module Domotics::Core
       super
     end
 
+    def state
+      st = super
+      st.is_a?(Integer) ? st : 0
+    end
     def set_state(value = DEFAULT_LEVEL, opt = {})
       unless opt[:kill_fader] == :no
         @fade_lock.synchronize do

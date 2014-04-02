@@ -58,6 +58,7 @@ module Domotics::Core
     def event_handler(msg = {})
       event, element = msg[:event], msg[:element]
       @logger.info { "Event message :#{event} from #{element} with state [#{element.state}]" }
+      Domotics::Core::WsServer.publish "#{element.room.name}/#{element.name}"
     end
 
     def destroy

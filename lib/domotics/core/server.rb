@@ -2,6 +2,8 @@ module Domotics::Core
   class Server
     def initialize(args = {})
       @logger = Domotics::Core::Setup.logger || Logger.new(STDERR)
+      @args = {}
+      @args[:Host], @args[:Port] = args[:host], args[:port]
     end
     def call(env)
       # [object]/[action]/[params]
@@ -22,7 +24,7 @@ module Domotics::Core
         result = object.public_send(action, *request.map { |param| param.to_isym })
       rescue Exception => e
         @logger.error { e.message }
-        @logger.debug { e }
+        @logger.debug { e.backtrace.join $/ }
         return invalid 'request'
       end
       case form
@@ -34,6 +36,10 @@ module Domotics::Core
       else
         return ok object.verbose_state.to_s
       end
+    end
+
+    def run
+      Rack::Handler::Thin.run Rack::Builder.new{ run Domotics::Core::Server.new }, @args
     end
 
     private

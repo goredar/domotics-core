@@ -25,9 +25,11 @@ module Domotics::Core
     end
 
     def off
-      kill_crazy
-      @strips.values.each { |strip| strip.off } if on?
-      set_state :off
+      if on?
+        kill_crazy
+        @strips.values.each { |strip| strip.off }
+        set_state :off
+      end
     end
 
     def color
