@@ -7,7 +7,7 @@ Thread.class_eval do
         block.call
       rescue Exception => e
         Domotics::Core::Setup.logger.error { e.message }
-        Domotics::Core::Setup.logger.debug { e.inspect }
+        Domotics::Core::Setup.logger.debug { e.backtrace.join $/ }
         nil
       end
     end

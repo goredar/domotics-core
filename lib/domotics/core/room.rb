@@ -57,7 +57,7 @@ module Domotics::Core
     # Default - simple prints event
     def event_handler(msg = {})
       event, element = msg[:event], msg[:element]
-      @logger.info { "Event message :#{event} from #{element} with state [#{element.state}]" }
+      @logger.info { "[Domotics] event [#{event}] element [#{element}] state [#{element.state}]" }
       Domotics::Core::WsServer.publish "#{element.room.name}/#{element.name}"
     end
 

@@ -37,9 +37,7 @@ module Domotics::Core
     end
 
     def self.run(args = {})
-      Thread.new do
-        Rack::Handler::Thin.run self.new, args
-      end
+      Rack::Handler::Thin.run self.new, args
     end
 
     private

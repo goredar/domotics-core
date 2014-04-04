@@ -57,7 +57,7 @@ module Domotics::Core
     end
 
     def to_s
-      "Element[#{@room.name}@#{@name}](id:#{__id__})"
+      "#{@room.name}@#{@name}(id:#{__id__})"
     end
   end
 end

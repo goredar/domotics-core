@@ -3,7 +3,7 @@ module Domotics
     class CameraElement < Domotics::Core::Element
       def initialize(args = {})
         super
-        set_state @device.mode
+        set_state @device.mode if state != @device.mode
       end
       def image
         @device.current_link
