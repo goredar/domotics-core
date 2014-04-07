@@ -1,7 +1,7 @@
 module Domotics::Core
   class Element
     @@data = DataHash.new
-    attr_reader :name, :type, :room
+    attr_reader :name, :type, :room, :device
 
     def initialize(args = {})
       @room = args[:room]

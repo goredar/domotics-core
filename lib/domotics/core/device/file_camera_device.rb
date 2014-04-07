@@ -50,6 +50,7 @@ module Domotics::Core
         FileUtils.rm "#{@path}/#{event.name}"
       end
       @sensors.each { |sensor| sensor.state_changed :motion_detection }
+      @camera_element.state_changed :new_image
     end
 
     def current_link

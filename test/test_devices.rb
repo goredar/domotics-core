@@ -38,5 +38,6 @@ class DomoticsDevicesTestCase < Test::Unit::TestCase
     %x{echo "[test foto content]" > /tmp/test_foto_4.jpg}
     sleep 0.5
     assert_equal "[test foto content]", cam.camera_element.file.chomp
+    assert_equal Domotics::Core::Room[:test].last_event(cam.camera_element.name), :state_changed => :new_image
   end
 end

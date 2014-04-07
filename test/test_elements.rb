@@ -60,12 +60,14 @@ class DomoticsElementsTestCase < Test::Unit::TestCase
     sleep 0.01
     assert_equal room.last_event(btn.name), :state_changed => :long_tap
   end
-  
+
   def test_camera_motion_sensor
     room = Domotics::Core::Room[:test]
     cam_mt = room.cam_motion
+    saved_mode = cam_el.device.mode
     %x{echo "[test foto content]" > /tmp/test_foto.jpg}
     sleep 0.5
     assert_equal room.last_event(cam_mt.name), :state_changed => :motion_detection
+    assert_equal cam_el.device.mode, saved_mode
   end
 end
